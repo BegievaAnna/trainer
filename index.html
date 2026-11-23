@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тренажёр безопасности — Санкт-Петербург (1–4 класс)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="header-emoji" aria-hidden="true">🚨</div>
+      <h1>Тренажёр безопасности</h1>
+      <p class="subtitle">Санкт-Петербург · 1–4 класс</p>
+      <button id="btnTheme" class="theme-toggle" aria-label="Переключить тему">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-label">Тёмная тема</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="app">
+    <section id="screen-home" class="screen active">
+      <h2 class="screen-title">Выбери ситуацию</h2>
+      <p class="screen-subtitle">Нажимай на картинку и учись, как правильно себя вести. Всё как в настоящей жизни, только понарошку!</p>
+      <div class="scenario-grid" id="scenarioGrid"></div>
+      <div class="history-link">
+        <button id="btnShowHistory" class="btn-secondary">📜 Мои прохождения</button>
+      </div>
+    </section>
+
+    <section id="screen-scenario" class="screen">
+      <button id="btnBackHome" class="btn-back">← На главную</button>
+      <div class="scenario-header">
+        <div class="scenario-emoji" id="scenarioEmoji" aria-hidden="true"></div>
+        <h2 id="scenarioTitle"></h2>
+        <p id="stepCounter" class="step-counter"></p>
+        <div class="progress-bar" aria-hidden="true">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div id="scenarioContent">
+        <div class="step-card">
+          <div class="step-emoji" id="stepEmoji" aria-hidden="true"></div>
+          <p id="stepText" class="step-text"></p>
+        </div>
+        <p id="stepQuestion" class="step-question"></p>
+        <div id="optionsContainer" class="options-container"></div>
+        <div id="explanationBox" class="explanation-box hidden">
+          <div class="explanation-emoji" id="explanationEmoji" aria-hidden="true"></div>
+          <p id="explanationText"></p>
+          <button id="btnNextStep" class="btn-primary">Дальше →</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-result" class="screen">
+      <h2 class="screen-title">Результат</h2>
+      <div id="resultSummary" class="result-summary"></div>
+      <button id="btnResultHome" class="btn-primary">На главную</button>
+    </section>
+
+    <section id="screen-history" class="screen">
+      <h2 class="screen-title">Мои прохождения</h2>
+      <div id="historyList" class="history-list"></div>
+      <button id="btnHistoryHome" class="btn-secondary">На главную</button>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Учебный проект · Санкт-Петербург · данные хранятся только в твоём браузере</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

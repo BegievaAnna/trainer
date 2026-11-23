@@ -1,0 +1,675 @@
+/* ============================================================
+   Переменные и базовые стили — яркая детская палитра
+   ============================================================ */
+:root {
+  --primary: #ff6b35;
+  --primary-dark: #e5511e;
+  --secondary: #4ecdc4;
+  --secondary-dark: #2bb3a8;
+  --accent: #ffe66d;
+  --accent-dark: #ffd43b;
+  --danger: #ef476f;
+  --danger-dark: #d6335a;
+  --success: #06d6a0;
+  --success-dark: #05b586;
+  --warning: #ffb703;
+  --bg: #fff8f0;
+  --bg-alt: #ffeede;
+  --card: #ffffff;
+  --text: #2b2d42;
+  --text-muted: #6b6f8a;
+  --border: #ffd8b8;
+  --shadow-sm: 0 2px 8px rgba(255, 107, 53, 0.12);
+  --shadow-md: 0 6px 20px rgba(255, 107, 53, 0.18);
+  --shadow-lg: 0 12px 36px rgba(255, 107, 53, 0.25);
+  --radius: 22px;
+  --radius-sm: 16px;
+}
+
+body.dark {
+  --primary: #ff8c5a;
+  --primary-dark: #ff6b35;
+  --secondary: #4ecdc4;
+  --secondary-dark: #2bb3a8;
+  --accent: #ffe66d;
+  --accent-dark: #ffd43b;
+  --danger: #ff5c8a;
+  --success: #06d6a0;
+  --warning: #ffb703;
+  --bg: #1a1d2e;
+  --bg-alt: #242840;
+  --card: #2a2e45;
+  --text: #f1f3ff;
+  --text-muted: #a8adc9;
+  --border: #3a3f5c;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================================
+   Шапка
+   ============================================================ */
+.app-header {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 40%, #ffb703 100%);
+  color: #fff;
+  padding: 2rem 1rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+body.dark .app-header {
+  background: linear-gradient(135deg, #ff6b35 0%, #d6335a 50%, #7b2cbf 100%);
+}
+
+.app-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.25) 0, transparent 35%),
+    radial-gradient(circle at 90% 80%, rgba(255,255,255,0.2) 0, transparent 40%);
+  pointer-events: none;
+}
+
+.header-inner {
+  position: relative;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header-emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.app-header h1 {
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-shadow: 0 3px 0 rgba(0,0,0,0.15);
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  opacity: 0.95;
+  margin-top: 0.3rem;
+}
+
+.theme-toggle {
+  margin-top: 1.2rem;
+  background: rgba(255,255,255,0.25);
+  border: 3px solid #fff;
+  color: #fff;
+  border-radius: 99px;
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.15s, background 0.2s;
+}
+
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.4);
+  transform: scale(1.05);
+}
+
+.theme-icon { font-size: 1.3rem; }
+
+/* ============================================================
+   Основной контейнер
+   ============================================================ */
+#app {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.2rem 3.5rem;
+  flex: 1;
+}
+
+.screen { display: none; }
+.screen.active { display: block; animation: fadeIn 0.35s ease-out; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.screen-title {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.screen-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.8rem;
+  max-width: 640px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   Карточки ситуаций
+   ============================================================ */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.4rem;
+}
+
+.scenario-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1.8rem 1.5rem 1.6rem;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 4px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.scenario-card::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 8px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+}
+
+.scenario-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.scenario-card:active { transform: translateY(-2px) scale(1); }
+
+.scenario-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 0.8rem;
+  line-height: 1;
+  transition: transform 0.3s;
+}
+
+.scenario-card:hover .scenario-icon { transform: scale(1.15) rotate(-5deg); }
+
+.scenario-card h3 {
+  font-size: 1.35rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.scenario-card p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ============================================================
+   Экран сценария
+   ============================================================ */
+.btn-back {
+  background: var(--card);
+  border: 3px solid var(--border);
+  color: var(--primary);
+  font-size: 1.05rem;
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  margin-bottom: 1.2rem;
+  font-family: inherit;
+  font-weight: 800;
+  border-radius: 99px;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.btn-back:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateX(-3px);
+}
+
+.scenario-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.scenario-emoji {
+  font-size: 4.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.scenario-header h2 {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 0.4rem;
+  font-weight: 900;
+}
+
+.step-counter {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.progress-bar {
+  height: 18px;
+  background: var(--bg-alt);
+  border-radius: 99px;
+  overflow: hidden;
+  border: 3px solid var(--border);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  border-radius: 99px;
+  transition: width 0.5s ease;
+}
+
+.step-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.6rem;
+  margin-bottom: 1.2rem;
+  box-shadow: var(--shadow-sm);
+  border: 4px solid var(--border);
+  text-align: center;
+}
+
+.step-emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 0.7rem;
+}
+
+.step-text {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.step-question {
+  font-weight: 900;
+  font-size: 1.3rem;
+  margin-bottom: 1.1rem;
+  color: var(--primary);
+  text-align: center;
+}
+
+/* ============================================================
+   Варианты выбора
+   ============================================================ */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.option-btn {
+  background: var(--card);
+  border: 4px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.2rem 1.3rem;
+  text-align: left;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, transform 0.1s;
+  font-family: inherit;
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.5;
+  animation: slideUp 0.3s ease-out backwards;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.option-btn::before {
+  content: "👉";
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.option-btn:nth-child(1) { animation-delay: 0.02s; }
+.option-btn:nth-child(2) { animation-delay: 0.08s; }
+.option-btn:nth-child(3) { animation-delay: 0.14s; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--bg-alt);
+  transform: translateX(5px);
+}
+
+.option-btn:hover:not(:disabled)::before { transform: translateX(4px); }
+
+.option-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  animation: none;
+}
+
+.option-btn.correct-highlight {
+  border-color: var(--success);
+  background: rgba(6, 214, 160, 0.15);
+}
+
+.option-btn.wrong-highlight {
+  border-color: var(--danger);
+  background: rgba(239, 71, 111, 0.15);
+}
+
+/* ============================================================
+   Блок объяснения
+   ============================================================ */
+.explanation-box {
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.15) 0%, rgba(255, 230, 109, 0.2) 100%);
+  border: 4px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  margin-top: 1.4rem;
+  animation: slideUp 0.35s ease-out;
+  text-align: center;
+}
+
+.explanation-box.hidden { display: none; }
+
+.explanation-emoji {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+
+.explanation-box p {
+  margin-bottom: 1.1rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+/* ============================================================
+   Кнопки
+   ============================================================ */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 99px;
+  padding: 1rem 2rem;
+  font-size: 1.15rem;
+  font-weight: 900;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+  box-shadow: var(--shadow-md);
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: var(--shadow-lg);
+  filter: brightness(1.08);
+}
+
+.btn-primary:active { transform: translateY(0) scale(1); }
+
+.btn-secondary {
+  background: var(--card);
+  color: var(--primary);
+  border: 4px solid var(--primary);
+  border-radius: 99px;
+  padding: 0.9rem 1.8rem;
+  font-size: 1.1rem;
+  font-weight: 900;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(1.03);
+}
+
+.history-link { margin-top: 2.2rem; text-align: center; }
+
+/* ============================================================
+   Результат
+   ============================================================ */
+.result-summary {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  box-shadow: var(--shadow-md);
+  border: 4px solid var(--border);
+  margin-bottom: 1.4rem;
+}
+
+.result-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-sm);
+  font-weight: 900;
+  margin-bottom: 1.2rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.result-status.success {
+  background: linear-gradient(135deg, rgba(6, 214, 160, 0.2), rgba(6, 214, 160, 0.1));
+  color: var(--success-dark);
+  border: 4px solid var(--success);
+}
+
+body.dark .result-status.success { color: var(--success); }
+
+.result-status.warning {
+  background: linear-gradient(135deg, rgba(255, 183, 3, 0.2), rgba(255, 183, 3, 0.1));
+  color: #8a5a00;
+  border: 4px solid var(--warning);
+}
+
+body.dark .result-status.warning { color: var(--warning); }
+
+.result-status.fatal {
+  background: linear-gradient(135deg, rgba(239, 71, 111, 0.2), rgba(239, 71, 111, 0.1));
+  color: var(--danger-dark);
+  border: 4px solid var(--danger);
+}
+
+body.dark .result-status.fatal { color: var(--danger); }
+
+.result-scenario-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+
+.result-hint {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.result-choices { list-style: none; padding: 0; }
+
+.result-choices li {
+  padding: 1.1rem 0;
+  border-bottom: 3px dashed var(--border);
+}
+
+.result-choices li:last-child { border-bottom: none; }
+
+.result-choice-header {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.result-choice-text {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.result-choice-explanation {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  font-weight: 600;
+}
+
+.mistake { color: var(--danger); font-weight: 900; }
+.correct { color: var(--success); font-weight: 900; }
+
+.badge-fatal {
+  display: inline-block;
+  background: var(--danger);
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 0.15rem 0.7rem;
+  border-radius: 99px;
+  margin-left: 0.5rem;
+  font-weight: 900;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   История
+   ============================================================ */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.history-item {
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  padding: 1.3rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  border: 4px solid var(--border);
+  border-left: 8px solid var(--primary);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.history-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.history-item .date {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.history-item .title {
+  font-weight: 900;
+  color: var(--primary);
+  font-size: 1.15rem;
+  margin-bottom: 0.3rem;
+}
+
+.history-item .result-line {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* ============================================================
+   Подвал
+   ============================================================ */
+.app-footer {
+  text-align: center;
+  padding: 1.4rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  border-top: 3px solid var(--border);
+  background: var(--card);
+  font-weight: 600;
+}
+
+/* ============================================================
+   Адаптивность
+   ============================================================ */
+@media (max-width: 768px) {
+  body { font-size: 18px; }
+  .app-header h1 { font-size: 1.7rem; }
+  .header-emoji { font-size: 2.8rem; }
+  #app { padding: 1.6rem 0.9rem 2.8rem; }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .option-btn { font-size: 1rem; padding: 1rem; }
+  .screen-title { font-size: 1.5rem; }
+  .result-summary { padding: 1.3rem; }
+  .scenario-icon { font-size: 3.2rem; }
+  .scenario-emoji { font-size: 3.5rem; }
+  .step-emoji { font-size: 2.8rem; }
+  .step-question { font-size: 1.15rem; }
+  .step-text { font-size: 1.05rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
